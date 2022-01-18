@@ -1,0 +1,47 @@
+<form #signup="ngForm" (ngSubmit)="onSubmit()">
+  <h3>Cadastre-se</h3>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Nome de usuário</mat-label>
+      <input type="text" name="username" ngModel matInput required>
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="text" name="email" ngModel matInput required>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Data de nascimento</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        name="birthdate"
+        ngModel
+        required
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker">
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input type="password" name="password" matInput ngModel required>
+      <mat-icon matSuffix>lock</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmar Senha</mat-label>
+      <input type="confirm_password" name="confirm_password" matInput ngModel required>
+      <mat-icon matSuffix>lock</mat-icon>
+    </mat-form-field>
+  </p>
+  <button type="submit" [disabled]="signup.invalid" color="primary" mat-raised-button>Cadastrar</button>
+</form>
