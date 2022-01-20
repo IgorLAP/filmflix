@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { user } from 'rxfire/auth';
 import { docData } from 'rxfire/firestore';
 import { from, map, of, switchMap, tap } from 'rxjs';
@@ -43,6 +43,10 @@ export class AuthService {
     )
   }
 
+  logout(){
+    this.auth.signOut();
+  }
+
   get user(){
     //user do @angular/fire, tipo do firebase, retorna um usuario ou null | Se retonar o user ele tá logado
     return user(this.auth).pipe(
@@ -62,6 +66,18 @@ export class AuthService {
     const users = collection(this.db, 'users');
     const userDoc = doc(users, uid);
 
-    return docData(userDoc).pipe(map( (data) => data as User ));
+    return docData(userDoc).pipe(
+      map(
+        //converter a data do firebase em tipo Date do JS
+        (data) => ({ ...data, birthdate: data['birthdate'].toDate() } as User)
+      )
+    );
+  }
+
+  update(user: User){
+    const users = collection(this.db, 'users');
+    const userDoc = doc(users, user.uid);
+    //from irá retornar observable da operação - manter padrão
+    return from (updateDoc(userDoc, user as any));
   }
 }
