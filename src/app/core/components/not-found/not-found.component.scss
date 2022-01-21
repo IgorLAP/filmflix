@@ -1,0 +1,25 @@
+.example-card {
+  margin: 0 auto;
+  max-width: 650px;
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    width: 50%;
+  }
+}
+
+mat-card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+p{
+  margin: 10px 0;
+  font-size: 32px;
+}
