@@ -1,0 +1,7 @@
+<a routerLink="{{ result.media_type }}/{{ result.id }}">
+  <mat-grid-tile class="rounded-tile">
+    <div>
+      <img class="poster-image" [src]="createImageLink(result.poster_path)" [alt]="result.title || result.name">
+    </div>
+  </mat-grid-tile>
+</a>
