@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { MovieTvBase } from 'src/app/core/models/movie-tv-base';
+
+import { TmdbApiService } from './../../core/services/tmdb-api/tmdb-api.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -7,9 +12,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieDetailComponent implements OnInit {
 
-  constructor() { }
+  detail$!: Observable<MovieTvBase>;
+  urlBase: string = 'https://image.tmdb.org/t/p/original/'
+
+  constructor(private route: ActivatedRoute, private tmdbApiService: TmdbApiService) { }
 
   ngOnInit(): void {
+    //pegando o momento da rota, pegando parametros passados pela rota
+    const id: number = this.route.snapshot.params['id'];
+    this.detail$ = this.tmdbApiService.getDetailById(id, 'movie');
   }
 
 }

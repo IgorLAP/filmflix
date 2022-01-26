@@ -1,1 +1,10 @@
-<p>tv-detail works!</p>
+<section *ngIf="detail$ | async as detail">
+  <div class="imgHeader" [ngStyle]="{'background-image':'url('+ urlBase + detail.backdrop_path + ')'}"></div>
+  <div class="secContent">
+    <h1>{{ detail.name }}</h1>
+    <p class="mat-body-2">{{ detail.overview }}</p>
+    <mat-chip-list>
+      <mat-chip color="accent" selected>{{ detail.vote_average }}</mat-chip>
+    </mat-chip-list>
+  </div>
+</section>
